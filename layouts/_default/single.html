@@ -12,5 +12,8 @@
     <div class="article-body">
       {{ .Content }}
     </div>
+    {{ if eq .Section "posts" }}
+      {{ partial "comments.html" . }}
+    {{ end }}
   </article>
 {{ end }}

@@ -7,13 +7,44 @@
     themeToggle?.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
   }
 
+  function updateGiscusTheme() {
+    const iframe = document.querySelector("iframe.giscus-frame");
+    iframe?.contentWindow?.postMessage({
+      giscus: {
+        setConfig: {
+          theme: root.dataset.theme === "dark" ? "transparent_dark" : "light",
+        },
+      },
+    }, "https://giscus.app");
+  }
+
   updateThemeToggle();
   themeToggle?.addEventListener("click", () => {
     const next = root.dataset.theme === "dark" ? "light" : "dark";
     root.dataset.theme = next;
     localStorage.setItem("theme", next);
     updateThemeToggle();
+    updateGiscusTheme();
   });
+
+  const comments = document.querySelector(".comments");
+  if (comments) {
+    function connectGiscusTheme() {
+      const iframe = comments.querySelector("iframe.giscus-frame");
+      if (!iframe) return false;
+      iframe.addEventListener("load", updateGiscusTheme, { once: true });
+      updateGiscusTheme();
+      return true;
+    }
+
+    if (!connectGiscusTheme()) {
+      const observer = new MutationObserver(() => {
+        if (!connectGiscusTheme()) return;
+        observer.disconnect();
+      });
+      observer.observe(comments, { childList: true, subtree: true });
+    }
+  }
 
   const overlay = document.querySelector("[data-search-overlay]");
   const searchPanel = overlay?.querySelector('[role="dialog"]');

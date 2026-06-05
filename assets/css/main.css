@@ -381,6 +381,15 @@ input {
   font-size: 0.92em;
 }
 
+.comments {
+  margin-top: 64px;
+}
+
+.comments h2 {
+  margin: 0 0 24px;
+  font-size: 20px;
+}
+
 .search-overlay {
   position: fixed;
   inset: 0;

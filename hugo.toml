@@ -17,6 +17,12 @@ enableRobotsTXT = true
   plausibleHost = "https://analytics.danohn.com"
   plausibleDomain = "danohn.com"
 
+[params.giscus]
+  repo = "danohn/danohn.com"
+  repoId = "R_kgDOSxo24w"
+  category = "Comments"
+  categoryId = "DIC_kwDOSxo2484C-i1-"
+
 [taxonomies]
   topic = "topics"
 
