@@ -1,0 +1,10 @@
+<section class="share" aria-labelledby="share-title" data-share data-share-title="{{ .Title }}" data-share-url="{{ .Permalink }}">
+  <h2 id="share-title">Share</h2>
+  <div class="share-actions">
+    <button type="button" data-share-native hidden>Share</button>
+    <a href="https://x.com/intent/post?url={{ .Permalink | urlquery }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener">X</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" target="_blank" rel="noopener">LinkedIn</a>
+    <button type="button" data-share-copy>Copy link</button>
+    <span class="share-status" data-share-status aria-live="polite"></span>
+  </div>
+</section>

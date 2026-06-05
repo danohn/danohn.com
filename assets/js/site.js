@@ -1,7 +1,8 @@
 (function () {
   const root = document.documentElement;
-
+  const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
   const themeToggle = document.querySelector("[data-theme-toggle]");
+
   function updateThemeToggle() {
     const isDark = root.dataset.theme === "dark";
     themeToggle?.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
@@ -27,6 +28,13 @@
     updateGiscusTheme();
   });
 
+  colorScheme.addEventListener("change", (event) => {
+    if (localStorage.getItem("theme")) return;
+    root.dataset.theme = event.matches ? "dark" : "light";
+    updateThemeToggle();
+    updateGiscusTheme();
+  });
+
   const comments = document.querySelector(".comments");
   if (comments) {
     function connectGiscusTheme() {
@@ -44,6 +52,35 @@
       });
       observer.observe(comments, { childList: true, subtree: true });
     }
+  }
+
+  const share = document.querySelector("[data-share]");
+  if (share) {
+    const shareTitle = share.dataset.shareTitle;
+    const shareUrl = share.dataset.shareUrl;
+    const nativeShare = share.querySelector("[data-share-native]");
+    const copyShare = share.querySelector("[data-share-copy]");
+    const shareStatus = share.querySelector("[data-share-status]");
+
+    if (navigator.share && nativeShare) {
+      nativeShare.hidden = false;
+      nativeShare.addEventListener("click", async () => {
+        try {
+          await navigator.share({ title: shareTitle, url: shareUrl });
+        } catch (error) {
+          if (error.name !== "AbortError" && shareStatus) shareStatus.textContent = "Unable to share.";
+        }
+      });
+    }
+
+    copyShare?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        if (shareStatus) shareStatus.textContent = "Link copied.";
+      } catch {
+        if (shareStatus) shareStatus.textContent = "Unable to copy link.";
+      }
+    });
   }
 
   const overlay = document.querySelector("[data-search-overlay]");

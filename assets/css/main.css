@@ -385,9 +385,44 @@ input {
   margin-top: 64px;
 }
 
+.share {
+  margin-top: 52px;
+}
+
+.share h2,
 .comments h2 {
   margin: 0 0 24px;
   font-size: 20px;
+}
+
+.share-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.share-actions a,
+.share-actions button {
+  min-height: 38px;
+  padding: 7px 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.share-actions a:hover,
+.share-actions button:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
+.share-status {
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .search-overlay {
