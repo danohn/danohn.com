@@ -117,7 +117,7 @@
       .slice(0, 6);
 
     if (!matches.length) {
-      renderSearchMessage("No matching notes yet.");
+      renderSearchMessage("No matching posts yet.");
       return;
     }
 
