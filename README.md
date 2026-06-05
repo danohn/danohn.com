@@ -103,6 +103,7 @@ search. Queries must contain at least three characters.
 - `assets/css/main.css`: visual system and responsive styles
 - `assets/js/site.js`: theme and search behavior, minified and fingerprinted by Hugo
 - `static/CNAME`: GitHub Pages custom domain
+- `static/favicon*`, `static/apple-touch-icon.png`, and `static/site.webmanifest`: browser and device icons
 - `.github/workflows/pages.yml`: production build and deployment workflow
 
 ## Configuration
