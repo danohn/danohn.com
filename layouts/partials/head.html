@@ -43,8 +43,8 @@
     {{ with .Params.topics }}{{ $jsonLd = merge $jsonLd (dict "articleSection" (delimit . ", ")) }}{{ end }}
     <script type="application/ld+json">{{ $jsonLd | jsonify | safeJS }}</script>
   {{ end }}
-  {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{ $css := resources.Get "css/main.css" | minify }}
+  <style>{{ $css.Content | safeCSS }}</style>
   <link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | relURL }}" title="{{ site.Title }}">
   {{ partial "analytics.html" . }}
 </head>
