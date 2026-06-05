@@ -1,0 +1,13 @@
+<div class="search-overlay" data-search-overlay data-search-index-url="{{ "index.json" | relURL }}" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-labelledby="search-title">
+    <div class="search-panel-header">
+      <h2 id="search-title">Search notes</h2>
+      <button type="button" data-search-close>Close</button>
+    </div>
+    <label class="search-field">
+      <span>Query</span>
+      <input type="search" data-search-input placeholder="Try kubernetes, inference, cli...">
+    </label>
+    <div class="search-results" data-search-results aria-live="polite"></div>
+  </div>
+</div>

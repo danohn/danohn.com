@@ -1,0 +1,41 @@
+{{ define "main" }}
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{ $featured := index $posts 0 }}
+  <section class="intro">
+    <h1>{{ site.Params.description }}</h1>
+  </section>
+
+  {{ with $featured }}
+    <section class="featured" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
+      <p class="eyebrow">Latest</p>
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p class="summary">{{ .Description }}</p>
+      <div class="meta-row">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <span>{{ .ReadingTime }} min read</span>
+        {{ range first 4 .Params.topics }}<span class="topic-pill">{{ . }}</span>{{ end }}
+      </div>
+      {{ with .Params.preview }}
+        <pre class="code-preview"><code>{{ . }}</code></pre>
+      {{ end }}
+    </section>
+  {{ end }}
+
+  {{ with after 1 $posts }}
+    <section class="post-index" aria-labelledby="all-posts">
+      <h2 id="all-posts">All posts</h2>
+      <div class="post-list">
+        {{ range . }}
+          <article class="post-row" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <span>{{ .ReadingTime }} min read</span>
+            <span class="topic-wrap">
+              {{ range first 3 .Params.topics }}<span class="topic-pill">{{ . }}</span>{{ end }}
+            </span>
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

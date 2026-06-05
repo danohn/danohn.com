@@ -1,0 +1,42 @@
+baseURL = "https://danohn.com/"
+locale = "en-us"
+title = "danohn.com"
+enableRobotsTXT = true
+
+[params]
+  description = "Engineering notes from the things I’m building and learning."
+  author = "Daniel"
+  socialImage = ""
+
+[params.social]
+  github = "https://github.com/danohn"
+  x = "https://x.com/dan_ohn"
+  linkedin = "https://www.linkedin.com/in/dohnesorge/"
+
+[params.analytics]
+  plausibleHost = "https://analytics.danohn.com"
+  plausibleDomain = "danohn.com"
+
+[taxonomies]
+  topic = "topics"
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "github"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 20

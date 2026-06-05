@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <article class="article">
+    <header class="article-header">
+      <h1>{{ .Title }}</h1>
+      <p class="dek">{{ .Description }}</p>
+      <div class="meta-row">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <span>{{ .ReadingTime }} min read</span>
+        {{ range .Params.topics }}<a class="topic-pill" href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
+      </div>
+    </header>
+    <div class="article-body">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

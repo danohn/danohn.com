@@ -1,0 +1,50 @@
+<head>
+  {{ $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
+  {{ $description := .Description | default .Params.summary | default .Summary | plainify | default site.Params.description }}
+  {{ $image := .Params.image | default site.Params.socialImage }}
+  {{ $canonical := .Params.canonical | default .Permalink }}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    try {
+      const storedTheme = localStorage.getItem("theme");
+      if (storedTheme) document.documentElement.dataset.theme = storedTheme;
+    } catch {}
+  </script>
+  <meta name="description" content="{{ $description }}">
+  <meta name="author" content="{{ site.Params.author }}">
+  <title>{{ $title }}</title>
+  <link rel="canonical" href="{{ $canonical }}">
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  {{ with $image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+  <meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  {{ with $image }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
+  {{ if and .IsPage (eq .Section "posts") }}
+    {{ $jsonLd := dict
+      "@context" "https://schema.org"
+      "@type" "BlogPosting"
+      "headline" .Title
+      "description" $description
+      "url" .Permalink
+      "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+      "author" (dict "@type" "Person" "name" site.Params.author)
+      "publisher" (dict "@type" "Person" "name" site.Params.author)
+      "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    }}
+    {{ with $image }}{{ $jsonLd = merge $jsonLd (dict "image" (. | absURL)) }}{{ end }}
+    {{ with .Params.topics }}{{ $jsonLd = merge $jsonLd (dict "keywords" (delimit . ", ")) }}{{ end }}
+    {{ with .Params.topics }}{{ $jsonLd = merge $jsonLd (dict "articleSection" (delimit . ", ")) }}{{ end }}
+    <script type="application/ld+json">{{ $jsonLd | jsonify | safeJS }}</script>
+  {{ end }}
+  {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  <link rel="alternate" type="application/rss+xml" href="{{ "index.xml" | relURL }}" title="{{ site.Title }}">
+  {{ partial "analytics.html" . }}
+</head>

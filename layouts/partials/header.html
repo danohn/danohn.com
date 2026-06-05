@@ -1,0 +1,17 @@
+<header class="site-header">
+  <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }} home">{{ site.Title }}</a>
+  <nav class="top-nav" aria-label="Main navigation">
+    <div class="nav-links">
+      {{ range site.Menus.main }}
+        <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+      {{ end }}
+    </div>
+    <div class="nav-actions">
+      <button class="icon-button" type="button" data-search-open aria-label="Open search">Search</button>
+      <button class="icon-button icon-only" type="button" data-theme-toggle aria-label="Switch to dark mode">
+        {{ partial "icons/moon.html" . }}
+        {{ partial "icons/sun.html" . }}
+      </button>
+    </div>
+  </nav>
+</header>

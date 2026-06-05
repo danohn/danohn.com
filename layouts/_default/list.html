@@ -1,0 +1,23 @@
+{{ define "main" }}
+  <section class="intro">
+    <h1>{{ .Title }}</h1>
+  </section>
+  <section class="post-index">
+    <div class="post-list">
+      {{ range .Pages }}
+        {{ if eq .Kind "term" }}
+          <article class="post-row term-row">
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <span>{{ len .Pages }} {{ cond (eq (len .Pages) 1) "post" "posts" }}</span>
+          </article>
+        {{ else }}
+          <article class="post-row">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <span>{{ .ReadingTime }} min read</span>
+          </article>
+        {{ end }}
+      {{ end }}
+    </div>
+  </section>
+{{ end }}
