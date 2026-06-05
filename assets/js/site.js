@@ -85,7 +85,7 @@
 
   const overlay = document.querySelector("[data-search-overlay]");
   const searchPanel = overlay?.querySelector('[role="dialog"]');
-  const openSearch = document.querySelector("[data-search-open]");
+  const openSearch = document.querySelectorAll("[data-search-open]");
   const closeSearch = document.querySelector("[data-search-close]");
   const searchInput = document.querySelector("[data-search-input]");
   const results = document.querySelector("[data-search-results]");
@@ -179,7 +179,7 @@
     renderResults(event.target.value);
   }
 
-  openSearch?.addEventListener("click", openPanel);
+  openSearch.forEach((button) => button.addEventListener("click", openPanel));
   closeSearch?.addEventListener("click", closePanel);
   searchInput?.addEventListener("input", handleSearchInput);
   overlay?.addEventListener("click", (event) => {

@@ -191,6 +191,49 @@ input {
   letter-spacing: 0;
 }
 
+.not-found {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 8vh 0 48px;
+}
+
+.not-found h1 {
+  margin: 0 0 12px;
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.08;
+}
+
+.not-found > p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.not-found-actions a,
+.not-found-actions button {
+  min-height: 40px;
+  padding: 7px 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.not-found-actions a:hover,
+.not-found-actions button:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
 .featured {
   max-width: 760px;
   margin: 0 auto;
