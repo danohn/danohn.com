@@ -239,6 +239,24 @@ input {
   font-size: 13px;
 }
 
+.post-preview {
+  display: -webkit-box;
+  max-width: 720px;
+  margin: 24px 0 10px;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.read-more {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 560;
+}
+
 .topic-pill {
   display: inline-flex;
   align-items: center;

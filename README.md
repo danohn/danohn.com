@@ -77,6 +77,7 @@ The custom domain is declared in `static/CNAME`. GitHub Pages handles HTTPS.
 ## Site Features
 
 - Responsive light and dark themes that default to the visitor's system preference
+- Latest-post homepage preview with a compact post archive
 - Client-side search across post titles, descriptions, content, and topics
 - Topic archive pages generated from post front matter
 - Native, X, LinkedIn, and copy-link sharing on posts

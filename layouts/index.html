@@ -15,6 +15,8 @@
         <span>{{ .ReadingTime }} min read</span>
         {{ range first 4 .Params.topics }}<span class="topic-pill">{{ . }}</span>{{ end }}
       </div>
+      <p class="post-preview">{{ .Params.summary | default .Summary | plainify | truncate 320 }}</p>
+      <a class="read-more" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}">Read post <span aria-hidden="true">&rarr;</span></a>
       {{ with .Params.preview }}
         <pre class="code-preview"><code>{{ . }}</code></pre>
       {{ end }}
