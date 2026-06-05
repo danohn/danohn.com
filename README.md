@@ -97,7 +97,7 @@ search. Queries must contain at least three characters.
 - `layouts/index.json`: client-side search index template
 - `layouts/robots.txt`: generated robots file
 - `assets/css/main.css`: visual system and responsive styles
-- `static/js/site.js`: theme and search behavior
+- `assets/js/site.js`: theme and search behavior, minified and fingerprinted by Hugo
 - `static/CNAME`: GitHub Pages custom domain
 - `.github/workflows/pages.yml`: production build and deployment workflow
 

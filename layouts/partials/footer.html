@@ -7,4 +7,5 @@
     {{ with site.Params.social.linkedin }}<a href="{{ . }}" rel="me noopener" target="_blank">LinkedIn</a>{{ end }}
   </nav>
 </footer>
-<script src="{{ "js/site.js" | relURL }}" defer></script>
+{{ $js := resources.Get "js/site.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
