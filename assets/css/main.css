@@ -209,31 +209,6 @@ input {
   font-size: 17px;
 }
 
-.not-found-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-}
-
-.not-found-actions a,
-.not-found-actions button {
-  min-height: 40px;
-  padding: 7px 14px;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-}
-
-.not-found-actions a:hover,
-.not-found-actions button:hover {
-  color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-}
-
 .featured {
   max-width: 760px;
   margin: 0 auto;
