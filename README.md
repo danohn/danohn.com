@@ -52,6 +52,7 @@ image: ""
 - `image` optionally supplies an Open Graph and Twitter preview image.
 
 Write the post below the closing `---`, then commit and push it to publish.
+Posts without an `image` use `static/images/social/default.png`.
 
 ## Build
 

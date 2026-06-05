@@ -6,7 +6,7 @@ enableRobotsTXT = true
 [params]
   description = "Engineering notes from the things I’m building and learning."
   author = "Daniel"
-  socialImage = ""
+  socialImage = "/images/social/default.png"
 
 [params.social]
   github = "https://github.com/danohn"
