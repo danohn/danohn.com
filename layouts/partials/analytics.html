@@ -1,7 +1,11 @@
 {{ if hugo.IsProduction }}
   {{ with site.Params.analytics }}
-    {{ if and .plausibleHost .plausibleDomain }}
-      <script defer data-domain="{{ .plausibleDomain }}" src="{{ strings.TrimSuffix "/" .plausibleHost }}/js/script.js"></script>
+    {{ with .plausibleScript }}
+      <script async src="{{ . }}"></script>
+      <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+      </script>
     {{ end }}
   {{ end }}
 {{ end }}

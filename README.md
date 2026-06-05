@@ -106,7 +106,8 @@ search. Queries must contain at least three characters.
 Social profile links, site metadata, and Plausible settings live in
 `hugo.toml`.
 
-Production builds load Plausible from `https://analytics.danohn.com`. The
-analytics host and tracked domain are configured under `[params.analytics]`.
+Production builds load the Plausible CE tracking script from
+`https://analytics.danohn.com`. Its instance-specific script URL is configured
+under `[params.analytics]`.
 Giscus repository and discussion category identifiers are configured under
 `[params.giscus]`.

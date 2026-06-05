@@ -14,8 +14,7 @@ enableRobotsTXT = true
   linkedin = "https://www.linkedin.com/in/dohnesorge/"
 
 [params.analytics]
-  plausibleHost = "https://analytics.danohn.com"
-  plausibleDomain = "danohn.com"
+  plausibleScript = "https://analytics.danohn.com/js/pa-y0g4-do_o7Mkl5zAZtMND.js"
 
 [params.giscus]
   repo = "danohn/danohn.com"
