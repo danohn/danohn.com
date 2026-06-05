@@ -6,73 +6,53 @@ lastmod: 2026-06-05
 topics: ["kubernetes", "tooling"]
 ---
 
-When people hear that I'm learning Kubernetes, they often assume I'm working through a certification course, reading books cover-to-cover, or following a structured training program.
+Most people hear "I'm learning Kubernetes" and picture something tidy. A certification path. A book with sticky notes in it. Maybe a training course with modules, quizzes, and a progress bar.
 
-The reality is much messier.
+Mine has not looked like that.
 
-Most of my learning happens while I'm building things, breaking things, and asking questions.
-
-And increasingly, my favorite learning tool has become Codex.
+Most of it has come from building small things, breaking them, staring at `kubectl` output, and asking better questions the next time around. Lately, one of the tools I keep coming back to is Codex.
 
 ## The Problem With Learning Kubernetes
 
-Kubernetes has an enormous surface area.
+Kubernetes gets wide very quickly.
 
-You start by learning Pods, then Deployments, then Services, then Ingresses. Before long you're trying to understand:
+You start with Pods. Then Deployments. Then Services and Ingress. That part feels manageable for about five minutes, and then you run into networking, storage, RBAC, service accounts, Helm, GitOps, StatefulSets, affinity rules, taints, CNI plugins, CSI drivers, certificates, and half a dozen words that sound simple until you try to explain them back to yourself.
 
-- Networking
-- Storage
-- RBAC
-- Service Accounts
-- Operators
-- Helm
-- GitOps
-- StatefulSets
-- Affinity rules
-- Taints and tolerations
-- CNI plugins
-- CSI drivers
-- Certificate management
+The information is everywhere.
 
-The challenge isn't finding information.
+The hard part is joining it together.
 
-The challenge is understanding how all the pieces fit together.
+A lot of tutorials are good at explaining what a resource does. A Pod runs containers. A Service gives you a stable way to reach them. An Ingress gets traffic into the cluster. Those definitions help, but they don't always answer the question I care about most: why does this thing exist at all?
 
-I found that many tutorials teach *what* a resource does, but not necessarily *why it exists*, *when to use it*, or *what problem it was designed to solve*.
+That is where Codex has been useful for me. I do not treat it like a search engine. I treat it more like someone sitting next to me while I am poking at a cluster.
 
-That's where having an AI pair-programmer becomes incredibly useful.
+## How I Actually Use It
 
-## My Learning Workflow
+When I hit a Kubernetes concept I do not understand, I try not to ask for the textbook definition first.
 
-When I encounter a concept I don't understand, I don't ask for a definition.
+I ask the annoying questions.
 
-Instead, I ask questions like:
+Why does this exist? What broke badly enough that Kubernetes needed this object? What would happen if I skipped it? What would I use instead? When would this be the wrong tool?
 
-- Why does this exist?
-- What problem does it solve?
-- What would happen if it didn't exist?
-- What are the alternatives?
-- When should I not use it?
-
-For example, instead of asking:
+For example, I could ask:
 
 > What is a StatefulSet?
 
-I'll ask:
+That gives me an answer, but it is usually not the answer that makes the idea click.
 
-> Why can't I just use a Deployment? What breaks if I do?
+The better question is:
 
-That usually leads to a much deeper understanding.
+> Why can't I just use a Deployment for this? What breaks?
 
-The goal isn't memorization.
+Now the conversation has somewhere to go. You start talking about stable network identity, ordered rollouts, persistent volumes, DNS names, and why a database pod is different from a stateless web app. It stops being a Kubernetes vocabulary lesson and starts becoming a model of the system.
 
-The goal is building mental models.
+That is what I am after.
 
-## Learning Through Conversation
+## Following the Thread
 
-One thing I particularly like about Codex is that I can keep drilling deeper.
+The part I like most is being able to keep drilling down without starting over.
 
-A typical learning path might look like:
+A normal conversation might go something like this:
 
 ```text
 What is a StatefulSet?
@@ -98,107 +78,62 @@ How does CoreDNS know about them?
 Where is that information stored?
 ```
 
-Eventually you're tracing a feature all the way down to the Kubernetes API.
+By the end, I am not just learning what a StatefulSet is. I am tracing the path through Services, DNS, CoreDNS, the Kubernetes API, and the control plane.
 
-That's where the real learning happens.
+That is a very different kind of learning.
+
+It also exposes the gaps quickly. Sometimes I realise I do not understand Services as well as I thought. Or I know what CoreDNS does in theory, but I cannot describe how it learns about new records. Good. That gives me the next question.
 
 ## The Skill I Built
 
-As I spent more time learning Kubernetes, I noticed I was repeatedly asking Codex for the same type of explanations.
+After a while, I noticed I was asking Codex for the same kind of explanation again and again.
 
-I wanted answers that were:
+I wanted Kubernetes answers that started with the problem, not the API object. Beginner friendly, but not shallow. Practical, but still willing to go down a level when I asked. The kind of explanation you might get from a senior engineer who has seen the weird failure modes before.
 
-- Beginner friendly
-- Practical
-- Focused on understanding rather than memorization
-- Based on real-world examples
-- Willing to go as deep as necessary
-
-So I created a custom Codex skill:
-
-**learn-k8s**
-
-GitHub:
+So I made a Codex skill called `learn-k8s`:
 
 https://github.com/danohn/learn-k8s
 
-The goal of the skill is simple:
+The idea is simple. When I ask about Kubernetes, I want Codex to slow down and teach the concept from first principles.
 
-When I ask Kubernetes questions, I want Codex to act more like an experienced mentor than a search engine.
+Start with the thing that hurts. Then explain the shape of the solution. Then introduce the Kubernetes resource and show how it fits into a real cluster.
 
-Rather than immediately jumping into API definitions, I want explanations that:
+That order matters. If I start with the YAML, I usually end up memorising fields. If I start with the problem, the YAML has somewhere to live in my head.
 
-1. Start with the problem being solved.
-2. Build intuition first.
-3. Introduce the Kubernetes resource afterwards.
-4. Use examples from real clusters.
-5. Encourage follow-up questions.
+## Building Real Clusters
 
-In other words, teach Kubernetes the way a senior engineer might teach it to a junior engineer.
+I made one mistake early on: I tried to learn too much Kubernetes from diagrams.
 
-## Building a Real Cluster
+Diagrams help. They give you the map. But the map gets a lot more useful after you have watched a CNI install fail, chased a broken Ingress, or wondered why a pod can mount a volume on one node but not another.
 
-The biggest mistake I made early on was trying to learn Kubernetes entirely from diagrams.
+Over the last few months I have built clusters with kubeadm, k3s, Talos Linux, and managed Kubernetes services. None of them taught me as much when they worked as they did when they broke.
 
-Kubernetes only really starts making sense when you operate a cluster yourself.
+A failed CNI install made networking feel real. A broken Ingress forced me to follow traffic from the outside world into the cluster. A storage issue made PersistentVolumes stop being an abstract resource. RBAC only really landed once I hit an authentication problem and had to work out which identity was doing what.
 
-Over the last few months I've built clusters using:
+That is when Kubernetes starts to stick.
 
-- kubeadm
-- k3s
-- Talos Linux
-- Managed Kubernetes services
+## AI Does Not Replace the Work
 
-Every time something broke, I learned more.
+Codex does not replace the docs.
 
-A failed CNI install taught me networking.
+It does not replace labs. It definitely does not replace running the system yourself and dealing with the mess when something goes sideways.
 
-A broken Ingress taught me traffic flow.
+What it gives me is fast feedback while I am already in the problem. Instead of reading five blog posts and trying to stitch the answer together, I can ask the next question in the same thread. Then another one. Then a more specific one after I run a command and get a weird result back.
 
-A storage issue taught me persistent volumes.
+That loop matters.
 
-An authentication issue taught me RBAC.
+Read a bit. Try something. Break it. Ask why. Fix it. Ask what actually happened.
 
-Production-grade systems are excellent teachers.
+For me, that has been the useful part of AI-assisted learning. It keeps me close to the problem long enough for the idea to click.
 
-## AI Doesn't Replace Hands-On Experience
+## What I Still Need to Learn
 
-I don't think AI replaces documentation.
+I am still very much learning Kubernetes.
 
-I don't think AI replaces labs.
+There are whole areas I have only touched lightly: advanced networking, multi-cluster setups, service meshes, operators, production observability, and the darker corners of scheduling.
 
-And it definitely doesn't replace operating real systems.
+But the combination has worked well for me so far. Real clusters, official docs, hands-on experiments, and Codex as a patient person to ask "why?" for the tenth time.
 
-What it does provide is immediate feedback.
+If you are learning Kubernetes too, my advice is to build something small and real. Break it in a way that annoys you. Fix it. Then ask enough questions that you understand why the fix worked.
 
-Instead of spending an hour piecing together five different blog posts, I can have a conversation.
-
-I can ask "why" repeatedly until the concept clicks.
-
-That's the part that accelerates learning.
-
-## What's Next?
-
-I'm still very much on my Kubernetes learning journey.
-
-There are plenty of topics I haven't mastered yet:
-
-- Advanced networking
-- Multi-cluster architectures
-- Service meshes
-- Operators
-- Production-scale observability
-- Advanced scheduling
-
-But I've found that combining:
-
-1. Real clusters
-2. Documentation
-3. Hands-on experimentation
-4. AI-assisted learning
-
-has been one of the most effective ways I've ever learned a technology.
-
-If you're learning Kubernetes yourself, I'd encourage you to build something real, break it, fix it, and ask lots of questions along the way.
-
-The best learning happens one "why?" at a time.
+I am still doing exactly that.
