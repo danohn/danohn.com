@@ -79,9 +79,27 @@ input {
 }
 
 .brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.brand-domain {
   font-size: 22px;
   font-weight: 720;
   letter-spacing: 0;
+}
+
+.brand-author {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.brand:hover .brand-author {
+  color: var(--accent);
 }
 
 .top-nav {
@@ -614,7 +632,6 @@ input {
   }
 
   .brand {
-    display: inline-block;
     margin-bottom: 14px;
   }
 
