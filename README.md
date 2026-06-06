@@ -36,6 +36,7 @@ description: ""
 summary: ""
 date: "2026-06-05T00:00:00+10:00"
 lastmod: "2026-06-05T00:00:00+10:00"
+author: ""
 topics: []
 canonical: ""
 image: ""
@@ -47,12 +48,14 @@ image: ""
 - `summary` optionally provides a different internal search excerpt.
 - `date` is the original publication date.
 - `lastmod` is the most recent meaningful update date.
+- `author` optionally overrides the site-wide default author.
 - `topics` creates browsable topic pages.
 - `canonical` optionally points search engines to an original version elsewhere.
 - `image` optionally supplies an Open Graph and Twitter preview image.
 
 Write the post below the closing `---`, then commit and push it to publish.
 Posts without an `image` use `static/images/social/default.png`.
+Posts without an `author` use the site-wide author configured in `hugo.toml`.
 
 ## Build
 
