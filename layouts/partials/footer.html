@@ -2,10 +2,12 @@
   <p class="footer-copy">&copy; {{ now.Format "2006" }} Daniel Ohnesorge</p>
   <nav class="footer-links" aria-label="Footer links">
     <a href="{{ "privacy/" | relURL }}">Privacy</a>
-    <a href="{{ "index.xml" | relURL }}">RSS</a>
-    {{ with site.Params.social.github }}<a href="{{ . }}" rel="me noopener" target="_blank">GitHub</a>{{ end }}
-    {{ with site.Params.social.x }}<a href="{{ . }}" rel="me noopener" target="_blank">X</a>{{ end }}
-    {{ with site.Params.social.linkedin }}<a href="{{ . }}" rel="me noopener" target="_blank">LinkedIn</a>{{ end }}
+    <a class="social-link" href="{{ "index.xml" | relURL }}" aria-label="RSS feed" title="RSS feed">
+      <span class="social-icon social-icon-rss" aria-hidden="true"></span>
+    </a>
+    {{ with site.Params.social.github }}<a class="social-link" href="{{ . }}" rel="me noopener" target="_blank" aria-label="GitHub" title="GitHub"><span class="social-icon social-icon-github" aria-hidden="true"></span></a>{{ end }}
+    {{ with site.Params.social.x }}<a class="social-link" href="{{ . }}" rel="me noopener" target="_blank" aria-label="X" title="X"><span class="social-icon social-icon-x" aria-hidden="true"></span></a>{{ end }}
+    {{ with site.Params.social.linkedin }}<a class="social-link" href="{{ . }}" rel="me noopener" target="_blank" aria-label="LinkedIn" title="LinkedIn"><span class="social-icon social-icon-linkedin" aria-hidden="true"></span></a>{{ end }}
   </nav>
 </footer>
 {{ $js := resources.Get "js/site.js" | minify | fingerprint }}
