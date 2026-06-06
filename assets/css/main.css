@@ -239,6 +239,20 @@ input {
   font-size: 13px;
 }
 
+.post-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.post-author img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
 .post-preview {
   display: -webkit-box;
   max-width: 720px;

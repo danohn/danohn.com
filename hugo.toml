@@ -6,6 +6,7 @@ enableRobotsTXT = true
 [params]
   description = "Engineering notes from the things I’m building and learning."
   author = "Daniel Ohnesorge"
+  authorImage = "/images/authors/daniel-ohnesorge.jpg"
   socialImage = "/images/social/default.png"
 
 [params.social]
@@ -23,6 +24,7 @@ enableRobotsTXT = true
   categoryId = "DIC_kwDOSxo2484C-i1-"
 
 [taxonomies]
+  author = "authors"
   topic = "topics"
 
 [markup]

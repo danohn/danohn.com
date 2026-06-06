@@ -36,7 +36,7 @@ description: ""
 summary: ""
 date: "2026-06-05T00:00:00+10:00"
 lastmod: "2026-06-05T00:00:00+10:00"
-author: ""
+authors: ["Daniel Ohnesorge"]
 topics: []
 canonical: ""
 image: ""
@@ -48,14 +48,15 @@ image: ""
 - `summary` optionally provides a different internal search excerpt.
 - `date` is the original publication date.
 - `lastmod` is the most recent meaningful update date.
-- `author` optionally overrides the site-wide default author.
+- `authors` assigns the post to one or more author pages.
 - `topics` creates browsable topic pages.
 - `canonical` optionally points search engines to an original version elsewhere.
 - `image` optionally supplies an Open Graph and Twitter preview image.
 
 Write the post below the closing `---`, then commit and push it to publish.
 Posts without an `image` use `static/images/social/default.png`.
-Posts without an `author` use the site-wide author configured in `hugo.toml`.
+Posts inherit the default author from `content/posts/_index.md`. The site-wide
+author name and avatar are configured in `hugo.toml`.
 
 ## Build
 
@@ -83,6 +84,7 @@ The custom domain is declared in `static/CNAME`. GitHub Pages handles HTTPS.
 - Latest-post homepage preview with a compact post archive
 - Client-side search across post titles, descriptions, content, and topics
 - Topic archive pages generated from post front matter
+- Author archive pages with linked post bylines
 - Native, X, LinkedIn, and copy-link sharing on posts
 - GitHub Discussions comments powered by Giscus
 - Privacy policy covering analytics, comments, preferences, and hosting
@@ -97,6 +99,7 @@ search. Queries must contain at least three characters.
 ## Project Structure
 
 - `content/`: Markdown pages and posts
+- `content/posts/_index.md`: section defaults inherited by every post
 - `archetypes/posts.md`: default front matter for new posts
 - `hugo.toml`: site settings, navigation, topics, and output formats
 - `layouts/index.html`: home page

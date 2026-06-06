@@ -4,7 +4,13 @@
       <h1>{{ .Title }}</h1>
       <p class="dek">{{ .Description }}</p>
       <div class="meta-row">
-        {{ if eq .Section "posts" }}<span>By {{ .Params.author | default site.Params.author }}</span>{{ end }}
+        {{ if eq .Section "posts" }}
+          {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
+          <a class="post-author" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">
+            {{ if eq $author site.Params.author }}<img src="{{ site.Params.authorImage | relURL }}" alt="">{{ end }}
+            <span>By {{ $author }}</span>
+          </a>
+        {{ end }}
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
         <span>{{ .ReadingTime }} min read</span>
         {{ range .Params.topics }}<a class="topic-pill" href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
