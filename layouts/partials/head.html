@@ -1,7 +1,7 @@
 <head>
   {{ $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
   {{ $description := .Description | default .Params.summary | default .Summary | plainify | default site.Params.description }}
-  {{ $image := .Params.image | default site.Params.socialImage }}
+  {{ $image := partial "social-image.html" . }}
   {{ $canonical := .Params.canonical | default .Permalink }}
   {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
   <meta charset="utf-8">
@@ -30,11 +30,11 @@
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ site.Title }}">
-  {{ with $image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+  {{ with $image }}<meta property="og:image" content="{{ . }}">{{ end }}
   <meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
   <meta name="twitter:title" content="{{ $title }}">
   <meta name="twitter:description" content="{{ $description }}">
-  {{ with $image }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
+  {{ with $image }}<meta name="twitter:image" content="{{ . }}">{{ end }}
   {{ if and .IsPage (eq .Section "posts") }}
     {{ $jsonLd := dict
       "@context" "https://schema.org"
@@ -48,7 +48,7 @@
       "publisher" (dict "@type" "Person" "name" site.Params.author)
       "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
     }}
-    {{ with $image }}{{ $jsonLd = merge $jsonLd (dict "image" (. | absURL)) }}{{ end }}
+    {{ with $image }}{{ $jsonLd = merge $jsonLd (dict "image" .) }}{{ end }}
     {{ with .Params.topics }}{{ $jsonLd = merge $jsonLd (dict "keywords" (delimit . ", ")) }}{{ end }}
     {{ with .Params.topics }}{{ $jsonLd = merge $jsonLd (dict "articleSection" (delimit . ", ")) }}{{ end }}
     <script type="application/ld+json">{{ $jsonLd | jsonify | safeJS }}</script>

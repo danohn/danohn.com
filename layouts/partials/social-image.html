@@ -1,0 +1,77 @@
+{{- $page := . -}}
+{{- $result := site.Params.socialImage | absURL -}}
+{{- $explicit := $page.Params.socialImage | default $page.Params.image -}}
+
+{{- if $explicit -}}
+  {{- $result = $explicit | absURL -}}
+{{- else if and $page.IsPage (eq $page.Section "posts") -}}
+  {{- $cover := false -}}
+  {{- with partial "cover-image.html" $page -}}
+    {{- $cover = .resource -}}
+  {{- end -}}
+
+  {{- $title := $page.Title -}}
+  {{- $words := split $title " " -}}
+  {{- $lineCount := 1 -}}
+  {{- if gt (len $title) 32 }}{{ $lineCount = 2 }}{{ end -}}
+  {{- if gt (len $title) 66 }}{{ $lineCount = 3 }}{{ end -}}
+  {{- if gt $lineCount 1 -}}
+    {{- $perLine := div (add (len $words) (sub $lineCount 1)) $lineCount -}}
+    {{- $lines := slice -}}
+    {{- range seq 0 (sub $lineCount 1) -}}
+      {{- $start := mul . $perLine -}}
+      {{- if lt $start (len $words) -}}
+        {{- $lines = $lines | append (delimit (first $perLine (after $start $words)) " ") -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $title = delimit $lines "\n" -}}
+  {{- end -}}
+
+  {{- $subtitle := $page.Description | default $page.Params.summary | default "" | plainify -}}
+  {{- $subtitleWords := split $subtitle " " -}}
+  {{- if gt (len $subtitle) 72 -}}
+    {{- $subtitlePerLine := div (add (len $subtitleWords) 1) 2 -}}
+    {{- $subtitle = printf "%s\n%s" (delimit (first $subtitlePerLine $subtitleWords) " ") (delimit (after $subtitlePerLine $subtitleWords) " ") -}}
+  {{- end -}}
+  {{- $subtitleY := add 160 (mul $lineCount 74) -}}
+
+  {{- $topics := upper (delimit ($page.Params.topics | default (slice "Engineering")) "   ") -}}
+  {{- $background := false -}}
+  {{- $textColor := "#1d1f1c" -}}
+  {{- $mutedColor := "#2f714a" -}}
+  {{- $subtitleColor := "#686d66" -}}
+  {{- $fontRegular := resources.Get "fonts/Inter-Regular.ttf" -}}
+  {{- $fontSemiBold := resources.Get "fonts/Inter-SemiBold.ttf" -}}
+  {{- $fontBold := resources.Get "fonts/Inter-Bold.ttf" -}}
+
+  {{- with $cover -}}
+    {{- $background = .Fill "1200x630 Center webp q85" | images.Filter (images.GaussianBlur 3) -}}
+    {{- with resources.Get "images/social/base.png" -}}
+      {{- $blank := (.Crop "20x20 TopLeft").Resize "1200x630 png" -}}
+      {{- $overlay := $blank | images.Filter (images.Brightness -100) (images.Opacity 68) -}}
+      {{- $background = $background | images.Filter (images.Overlay $overlay 0 0) -}}
+    {{- end -}}
+    {{- $textColor = "#ffffff" -}}
+    {{- $mutedColor = "#b9e3c4" -}}
+    {{- $subtitleColor = "#d2d6d0" -}}
+  {{- else -}}
+    {{- with resources.Get "images/social/base.png" -}}
+      {{- $blank := .Crop "20x20 TopLeft" -}}
+      {{- $background = $blank.Resize "1200x630 webp q85" -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $background -}}
+    {{- $filters := slice
+      (images.Text $topics (dict "color" $mutedColor "font" $fontSemiBold "size" 22 "x" 72 "y" 62))
+      (images.Text $title (dict "color" $textColor "font" $fontBold "linespacing" 12 "size" 62 "x" 72 "y" 138))
+      (images.Text $subtitle (dict "color" $subtitleColor "font" $fontRegular "linespacing" 7 "size" 25 "x" 72 "y" $subtitleY))
+      (images.Text site.Title (dict "color" $textColor "font" $fontBold "size" 30 "x" 72 "y" 520))
+      (images.Text site.Params.author (dict "color" $mutedColor "font" $fontRegular "size" 22 "x" 72 "y" 565))
+    -}}
+    {{- $generated := . | images.Filter $filters -}}
+    {{- $result = $generated.Permalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

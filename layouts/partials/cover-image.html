@@ -1,0 +1,13 @@
+{{- $page := . -}}
+{{- $result := false -}}
+{{- with $page.Params.cover.image -}}
+  {{- $path := . -}}
+  {{- $resourcePath := strings.TrimPrefix "/" $path -}}
+  {{- $result = dict "src" ($path | relURL) "resource" false -}}
+  {{- with $page.Resources.Get $path -}}
+    {{- $result = dict "src" .RelPermalink "resource" . -}}
+  {{- else with resources.Get $resourcePath -}}
+    {{- $result = dict "src" .RelPermalink "resource" . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}
