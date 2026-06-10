@@ -5,9 +5,11 @@
   {{- $resourcePath := strings.TrimPrefix "/" $path -}}
   {{- $result = dict "src" ($path | relURL) "resource" false -}}
   {{- with $page.Resources.Get $path -}}
-    {{- $result = dict "src" .RelPermalink "resource" . -}}
+    {{- $image := partial "responsive-image.html" (dict "resource" .) -}}
+    {{- $result = merge $image (dict "resource" .) -}}
   {{- else with resources.Get $resourcePath -}}
-    {{- $result = dict "src" .RelPermalink "resource" . -}}
+    {{- $image := partial "responsive-image.html" (dict "resource" .) -}}
+    {{- $result = merge $image (dict "resource" .) -}}
   {{- end -}}
 {{- end -}}
 {{- return $result -}}

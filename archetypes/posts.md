@@ -7,5 +7,7 @@ lastmod: "{{ .Date }}"
 authors: ["Daniel Ohnesorge"]
 topics: []
 canonical: ""
-image: ""
+cover:
+  image: ""
+  alt: ""
 ---

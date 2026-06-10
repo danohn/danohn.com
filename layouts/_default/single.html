@@ -33,7 +33,7 @@
     {{ with .Params.cover }}
       {{ $cover := partial "cover-image.html" $ }}
       <figure class="article-cover">
-        <img src="{{ $cover.src }}" alt="{{ .alt }}">
+        <img src="{{ $cover.src }}"{{ with $cover.srcset }} srcset="{{ . }}" sizes="(max-width: 960px) calc(100vw - 48px), 960px"{{ end }}{{ with $cover.width }} width="{{ . }}"{{ end }}{{ with $cover.height }} height="{{ . }}"{{ end }} alt="{{ .alt }}" decoding="async">
         {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
       </figure>
     {{ end }}

@@ -5,7 +5,7 @@ date: 2026-06-05
 lastmod: 2026-06-10
 topics: ["kubernetes", "tooling"]
 cover:
-  image: "/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/00-cover.png"
+  image: "00-cover.png"
   alt: "Xiaohei repairs a small Kubernetes cluster while following a loop from building and breaking to asking why and understanding."
 ---
 
@@ -25,7 +25,7 @@ The information is everywhere.
 
 The hard part is joining it together.
 
-![Xiaohei stitches scattered Kubernetes concepts into one connected system.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/01-stitching-kubernetes-together.png)
+![Xiaohei stitches scattered Kubernetes concepts into one connected system.](01-stitching-kubernetes-together.png)
 
 A lot of tutorials are good at explaining what a resource does. A Pod runs containers. A Service gives you a stable way to reach them. An Ingress gets traffic into the cluster. Those definitions help, but they don't always answer the question I care about most: why does this thing exist at all?
 
@@ -49,7 +49,7 @@ The better question is:
 
 > Why can't I just use a Deployment for this? What breaks?
 
-![Asking what breaks opens a Kubernetes definition to reveal identity, storage, and ordering underneath.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/02-ask-what-breaks.png)
+![Asking what breaks opens a Kubernetes definition to reveal identity, storage, and ordering underneath.](02-ask-what-breaks.png)
 
 Now the conversation has somewhere to go. You start talking about stable network identity, ordered rollouts, persistent volumes, DNS names, and why a database pod is different from a stateless web app. It stops being a Kubernetes vocabulary lesson and starts becoming a model of the system.
 
@@ -87,7 +87,7 @@ Where is that information stored?
 
 By the end, I am not just learning what a StatefulSet is. I am tracing the path through Services, DNS, CoreDNS, the Kubernetes API, and the control plane.
 
-![Xiaohei lowers a question through the layers from StatefulSet to the Kubernetes control plane.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/03-following-the-question.png)
+![Xiaohei lowers a question through the layers from StatefulSet to the Kubernetes control plane.](03-following-the-question.png)
 
 That is a very different kind of learning.
 
@@ -109,7 +109,7 @@ Start with the thing that hurts. Then explain the shape of the solution. Then in
 
 That order matters. If I start with the YAML, I usually end up memorising fields. If I start with the problem, the YAML has somewhere to live in my head.
 
-![Xiaohei shapes a real problem into a resource where YAML can fit meaningfully.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/04-give-yaml-somewhere-to-live.png)
+![Xiaohei shapes a real problem into a resource where YAML can fit meaningfully.](04-give-yaml-somewhere-to-live.png)
 
 ## Building Real Clusters
 
@@ -135,7 +135,7 @@ That loop matters.
 
 Read a bit. Try something. Break it. Ask why. Fix it. Ask what actually happened.
 
-![Xiaohei pushes a broken Kubernetes cluster through a repeated learning and repair loop.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/05-learning-repair-loop.png)
+![Xiaohei pushes a broken Kubernetes cluster through a repeated learning and repair loop.](05-learning-repair-loop.png)
 
 For me, that has been the useful part of AI-assisted learning. It keeps me close to the problem long enough for the idea to click.
 

@@ -1,0 +1,28 @@
+{{- $resource := .resource -}}
+{{- $maxWidth := .maxWidth | default 1600 -}}
+{{- $smallWidth := .smallWidth | default 800 -}}
+{{- $result := false -}}
+{{- $processable := in (slice "jpeg" "png" "webp" "gif" "tiff" "bmp") $resource.MediaType.SubType -}}
+
+{{- if $processable -}}
+  {{- $large := $resource -}}
+  {{- if gt $resource.Width $maxWidth -}}
+    {{- $large = $resource.Resize (printf "%dx webp q85" $maxWidth) -}}
+  {{- else -}}
+    {{- $large = $resource.Process "webp q85" -}}
+  {{- end -}}
+  {{- $small := $large -}}
+  {{- if gt $resource.Width $smallWidth -}}
+    {{- $small = $resource.Resize (printf "%dx webp q82" $smallWidth) -}}
+  {{- end -}}
+  {{- $result = dict
+    "src" $large.RelPermalink
+    "srcset" (printf "%s %dw, %s %dw" $small.RelPermalink $small.Width $large.RelPermalink $large.Width)
+    "width" $large.Width
+    "height" $large.Height
+  -}}
+{{- else -}}
+  {{- $result = dict "src" $resource.RelPermalink -}}
+{{- end -}}
+
+{{- return $result -}}

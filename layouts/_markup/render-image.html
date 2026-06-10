@@ -1,4 +1,11 @@
+{{- $destination := .Destination -}}
+{{- $resource := .Page.Resources.GetMatch $destination -}}
 <figure>
-  <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy">
-  {{ with .Title }}<figcaption>{{ . }}</figcaption>{{ end }}
+  {{- with $resource }}
+    {{- $image := partial "responsive-image.html" (dict "resource" .) -}}
+    <img src="{{ $image.src }}"{{ with $image.srcset }} srcset="{{ . }}" sizes="(max-width: 920px) calc(100vw - 48px), 920px"{{ end }}{{ with $image.width }} width="{{ . }}"{{ end }}{{ with $image.height }} height="{{ . }}"{{ end }} alt="{{ $.Text }}" loading="lazy" decoding="async">
+  {{- else }}
+    <img src="{{ $destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async">
+  {{- end }}
+  {{- with .Title }}<figcaption>{{ . }}</figcaption>{{ end }}
 </figure>

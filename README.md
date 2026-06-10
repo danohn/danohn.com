@@ -24,10 +24,19 @@ Analytics is disabled during local development.
 Generate a new post from the included archetype:
 
 ```bash
-hugo new content/posts/my-new-post.md
+hugo new content/posts/my-new-post/index.md
 ```
 
-This creates a Markdown file with the supported front matter:
+This creates a leaf bundle. Keep the post and all of its images together:
+
+```text
+content/posts/my-new-post/
+├── index.md
+├── cover.png
+└── diagram.png
+```
+
+The generated `index.md` includes the supported front matter:
 
 ```yaml
 ---
@@ -39,7 +48,9 @@ lastmod: "2026-06-05T00:00:00+10:00"
 authors: ["Daniel Ohnesorge"]
 topics: []
 canonical: ""
-image: ""
+cover:
+  image: ""
+  alt: ""
 ---
 ```
 
@@ -51,10 +62,19 @@ image: ""
 - `authors` assigns the post to one or more author pages.
 - `topics` creates browsable topic pages.
 - `canonical` optionally points search engines to an original version elsewhere.
-- `image` optionally supplies an Open Graph and Twitter preview image.
+- `cover.image` optionally displays a cover and supplies the background for the
+  generated Open Graph and Twitter preview image.
+- `cover.alt` describes the cover for screen readers.
 
 Write the post below the closing `---`, then commit and push it to publish.
-Posts without an `image` use `static/images/social/default.png`.
+Reference bundled images using paths relative to `index.md`:
+
+```markdown
+![A useful description of the diagram.](diagram.png)
+```
+
+Hugo generates responsive WebP variants for bundled covers and Markdown images.
+Posts without a cover receive a generated typographic social preview.
 Posts inherit the default author from `content/posts/_index.md`. The site-wide
 author name and avatar are configured in `hugo.toml`.
 
@@ -98,7 +118,7 @@ search. Queries must contain at least three characters.
 
 ## Project Structure
 
-- `content/`: Markdown pages and posts
+- `content/`: Markdown pages and post leaf bundles containing their images
 - `content/posts/_index.md`: section defaults inherited by every post
 - `archetypes/posts.md`: default front matter for new posts
 - `hugo.toml`: site settings, navigation, topics, and output formats
