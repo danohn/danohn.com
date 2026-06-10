@@ -852,9 +852,13 @@ input {
 
 .article-body {
   padding-top: 42px;
-  color: color-mix(in srgb, var(--text) 91%, var(--muted));
+  color: rgb(55, 57, 54);
   font-size: 17px;
   line-height: 1.78;
+}
+
+:root[data-theme="dark"] .article-body {
+  color: color-mix(in srgb, var(--text) 91%, var(--muted));
 }
 
 .article-body h2 {
