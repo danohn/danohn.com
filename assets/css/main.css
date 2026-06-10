@@ -735,8 +735,8 @@ input {
 .article-header h1 {
   max-width: 720px;
   margin: 0 0 18px;
-  font-size: clamp(40px, 5vw, 62px);
-  line-height: 1.06;
+  font-size: clamp(36px, 4vw, 48px);
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
@@ -1131,7 +1131,7 @@ input {
   }
 
   .article-header h1 {
-    font-size: 38px;
+    font-size: 32px;
   }
 
   .dek {
