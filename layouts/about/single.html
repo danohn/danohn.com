@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <article class="article about-page" aria-labelledby="about-title">
+    <h1 class="visually-hidden" id="about-title">{{ .Title }}</h1>
+    <div class="article-body">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}
