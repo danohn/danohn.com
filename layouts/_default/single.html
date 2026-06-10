@@ -1,14 +1,13 @@
 {{ define "main" }}
-  <article class="article">
-    <header class="article-header">
-      {{ if eq .Section "posts" }}
+  {{ $isPost := eq .Section "posts" }}
+  <article class="article{{ if not $isPost }} content-page{{ end }}">
+    {{ if $isPost }}
+      <header class="article-header">
         <nav class="article-topics" aria-label="Post topics">
           {{ range .Params.topics }}<a href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
         </nav>
-      {{ end }}
-      <h1>{{ .Title }}</h1>
-      <p class="dek">{{ .Description }}</p>
-      {{ if eq .Section "posts" }}
+        <h1>{{ .Title }}</h1>
+        <p class="dek">{{ .Description }}</p>
         {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
         <div class="article-byline">
           {{ if eq $author site.Params.author }}
@@ -23,13 +22,10 @@
             </div>
           </div>
         </div>
-      {{ else }}
-        <div class="meta-row">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-        <span>{{ .ReadingTime }} min read</span>
-        </div>
-      {{ end }}
-    </header>
+      </header>
+    {{ else }}
+      <h1 class="page-heading">{{ .Title }}</h1>
+    {{ end }}
     {{ with .Params.cover }}
       {{ $cover := partial "cover-image.html" $ }}
       <figure class="article-cover">
@@ -40,7 +36,7 @@
     <div class="article-body">
       {{ .Content }}
     </div>
-    {{ if eq .Section "posts" }}
+    {{ if $isPost }}
       {{ partial "share.html" . }}
       {{ partial "comments.html" . }}
     {{ end }}

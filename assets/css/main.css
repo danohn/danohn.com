@@ -275,34 +275,35 @@ input {
   margin-bottom: 28px;
 }
 
-.home-posts {
+.home-posts,
+.post-summaries {
   max-width: 760px;
   margin: 0 auto;
   padding: 4px 0 48px;
 }
 
-.home-post-list {
+.post-summary-list {
   display: grid;
 }
 
-.home-post {
+.post-summary {
   padding: 34px 0 38px;
   border-bottom: 1px solid var(--line);
 }
 
-.home-post:first-child {
+.post-summary:first-child {
   padding-top: 0;
 }
 
-.home-post:last-child {
+.post-summary:last-child {
   border-bottom: 0;
 }
 
-.home-post-topics {
+.post-summary-topics {
   margin-bottom: 14px;
 }
 
-.home-post h2 {
+.post-summary h2 {
   max-width: 720px;
   margin: 0 0 10px;
   font-size: 30px;
@@ -310,36 +311,13 @@ input {
   letter-spacing: 0;
 }
 
-.home-post .summary {
+.post-summary .summary {
   margin-bottom: 18px;
   font-size: 16px;
 }
 
-.home-post-byline {
+.post-summary-byline {
   margin-bottom: 20px;
-}
-
-.meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 16px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.post-author {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.post-author img {
-  width: 28px;
-  height: 28px;
-  object-fit: cover;
-  border: 1px solid var(--line);
-  border-radius: 50%;
 }
 
 .post-preview {
@@ -742,19 +720,20 @@ input {
   padding-bottom: 72px;
 }
 
-.about-page {
-  max-width: 680px;
+.page-heading,
+.intro .page-heading {
+  margin: 0;
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 430;
+  line-height: 1.1;
 }
 
-.about-page .article-body {
-  padding-top: 8px;
-  font-size: 18px;
+.page-intro {
+  padding-bottom: 14px;
 }
 
-.about-page .article-body p:first-child {
-  color: var(--text);
-  font-size: 22px;
-  line-height: 1.6;
+.content-page .article-body {
+  padding-top: 38px;
 }
 
 .article-header {
@@ -1165,19 +1144,24 @@ input {
     font-size: 23px;
   }
 
+  .page-heading,
+  .intro .page-heading {
+    font-size: 32px;
+  }
+
   .featured h2 {
     font-size: 24px;
   }
 
-  .home-post {
+  .post-summary {
     padding: 28px 0 32px;
   }
 
-  .home-post:first-child {
+  .post-summary:first-child {
     padding-top: 0;
   }
 
-  .home-post h2 {
+  .post-summary h2 {
     font-size: 26px;
   }
 

@@ -1,0 +1,23 @@
+<article class="post-summary" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
+  <nav class="article-topics post-summary-topics" aria-label="Post topics">
+    {{ range .Params.topics }}<a href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
+  </nav>
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{ with .Description }}<p class="summary">{{ . }}</p>{{ end }}
+  {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
+  <div class="article-byline post-summary-byline">
+    {{ if eq $author site.Params.author }}
+      <a class="article-author-avatar" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}" aria-label="Posts by {{ $author }}"><img src="{{ partial "author-image.html" . }}" alt=""></a>
+    {{ end }}
+    <div class="article-byline-text">
+      <a class="article-author-name" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">{{ $author }}</a>
+      <div class="article-meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <span aria-hidden="true">/</span>
+        <span>{{ .ReadingTime }} min read</span>
+      </div>
+    </div>
+  </div>
+  <p class="post-preview">{{ .Params.summary | default .Summary | plainify | truncate 280 }}</p>
+  <a class="read-more" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}">Read post <span aria-hidden="true">&rarr;</span></a>
+</article>

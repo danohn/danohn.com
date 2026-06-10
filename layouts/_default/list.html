@@ -1,23 +1,25 @@
 {{ define "main" }}
-  <section class="intro">
-    <h1>{{ .Title }}</h1>
+  <section class="intro page-intro">
+    <h1 class="page-heading">{{ .Title }}</h1>
   </section>
-  <section class="post-index">
-    <div class="post-list">
+  {{ if eq .Kind "taxonomy" }}
+    <section class="post-index">
+      <div class="post-list">
       {{ range .Pages }}
-        {{ if eq .Kind "term" }}
-          <article class="post-row term-row">
-            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-            <span>{{ len .Pages }} {{ cond (eq (len .Pages) 1) "post" "posts" }}</span>
-          </article>
-        {{ else }}
-          <article class="post-row">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-            <span>{{ .ReadingTime }} min read</span>
-          </article>
-        {{ end }}
+        <article class="post-row term-row">
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <span>{{ len .Pages }} {{ cond (eq (len .Pages) 1) "post" "posts" }}</span>
+        </article>
       {{ end }}
-    </div>
-  </section>
+      </div>
+    </section>
+  {{ else }}
+    <section class="post-summaries" aria-label="Posts">
+      <div class="post-summary-list">
+        {{ range .Pages }}
+          {{ partial "post-summary.html" . }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
 {{ end }}
