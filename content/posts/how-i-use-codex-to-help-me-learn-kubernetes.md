@@ -2,8 +2,11 @@
 title: "How I Use Codex to Help Me Learn Kubernetes"
 description: "A practical note on using Codex as a conversational mentor while building real Kubernetes intuition."
 date: 2026-06-05
-lastmod: 2026-06-05
+lastmod: 2026-06-10
 topics: ["kubernetes", "tooling"]
+cover:
+  image: "/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/00-cover.png"
+  alt: "Xiaohei repairs a small Kubernetes cluster while following a loop from building and breaking to asking why and understanding."
 ---
 
 Most people hear "I'm learning Kubernetes" and picture something tidy. A certification path. A book with sticky notes in it. Maybe a training course with modules, quizzes, and a progress bar.
@@ -21,6 +24,8 @@ You start with Pods. Then Deployments. Then Services and Ingress. That part feel
 The information is everywhere.
 
 The hard part is joining it together.
+
+![Xiaohei stitches scattered Kubernetes concepts into one connected system.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/01-stitching-kubernetes-together.png)
 
 A lot of tutorials are good at explaining what a resource does. A Pod runs containers. A Service gives you a stable way to reach them. An Ingress gets traffic into the cluster. Those definitions help, but they don't always answer the question I care about most: why does this thing exist at all?
 
@@ -43,6 +48,8 @@ That gives me an answer, but it is usually not the answer that makes the idea cl
 The better question is:
 
 > Why can't I just use a Deployment for this? What breaks?
+
+![Asking what breaks opens a Kubernetes definition to reveal identity, storage, and ordering underneath.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/02-ask-what-breaks.png)
 
 Now the conversation has somewhere to go. You start talking about stable network identity, ordered rollouts, persistent volumes, DNS names, and why a database pod is different from a stateless web app. It stops being a Kubernetes vocabulary lesson and starts becoming a model of the system.
 
@@ -80,6 +87,8 @@ Where is that information stored?
 
 By the end, I am not just learning what a StatefulSet is. I am tracing the path through Services, DNS, CoreDNS, the Kubernetes API, and the control plane.
 
+![Xiaohei lowers a question through the layers from StatefulSet to the Kubernetes control plane.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/03-following-the-question.png)
+
 That is a very different kind of learning.
 
 It also exposes the gaps quickly. Sometimes I realise I do not understand Services as well as I thought. Or I know what CoreDNS does in theory, but I cannot describe how it learns about new records. Good. That gives me the next question.
@@ -99,6 +108,8 @@ The idea is simple. When I ask about Kubernetes, I want Codex to slow down and t
 Start with the thing that hurts. Then explain the shape of the solution. Then introduce the Kubernetes resource and show how it fits into a real cluster.
 
 That order matters. If I start with the YAML, I usually end up memorising fields. If I start with the problem, the YAML has somewhere to live in my head.
+
+![Xiaohei shapes a real problem into a resource where YAML can fit meaningfully.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/04-give-yaml-somewhere-to-live.png)
 
 ## Building Real Clusters
 
@@ -124,6 +135,8 @@ That loop matters.
 
 Read a bit. Try something. Break it. Ask why. Fix it. Ask what actually happened.
 
+![Xiaohei pushes a broken Kubernetes cluster through a repeated learning and repair loop.](/images/posts/how-i-use-codex-to-help-me-learn-kubernetes/05-learning-repair-loop.png)
+
 For me, that has been the useful part of AI-assisted learning. It keeps me close to the problem long enough for the idea to click.
 
 ## What I Still Need to Learn
@@ -137,3 +150,5 @@ But the combination has worked well for me so far. Real clusters, official docs,
 If you are learning Kubernetes too, my advice is to build something small and real. Break it in a way that annoys you. Fix it. Then ask enough questions that you understand why the fix worked.
 
 I am still doing exactly that.
+
+<p class="image-attribution">Images inspired by Ian Xiaohei Illustrations</p>
