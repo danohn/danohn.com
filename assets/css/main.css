@@ -547,8 +547,7 @@ input {
 .article-cover img {
   display: block;
   width: 100%;
-  aspect-ratio: 1.9 / 1;
-  object-fit: cover;
+  height: auto;
   border-radius: 6px;
 }
 
@@ -605,6 +604,8 @@ input {
 
 .article-body figure img {
   display: block;
+  width: 100%;
+  height: auto;
   max-width: 100%;
   margin: 0 auto;
   border-radius: 6px;
