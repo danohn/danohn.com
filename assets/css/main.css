@@ -651,24 +651,30 @@ input {
 .footer-links .sponsor-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 28px;
-  margin: -2px 0;
-  padding: 2px 8px;
+  gap: 7px;
+  flex: 0 0 auto;
+  min-height: 30px;
+  margin: -3px 0;
+  padding: 3px 10px;
   color: var(--text);
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
 }
 
-.sponsor-link:hover {
-  color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+.sponsor-link svg {
+  width: 16px;
+  height: 16px;
+  fill: #bf3989;
 }
 
-.sponsor-link .social-icon {
-  width: 15px;
-  height: 15px;
+.footer-links .sponsor-link:hover {
+  color: var(--text);
+  background: var(--panel-strong);
+  border-color: color-mix(in srgb, var(--muted) 55%, var(--line));
 }
 
 .social-link {
