@@ -79,6 +79,16 @@ site. Posts without a cover receive a generated typographic social preview.
 Posts inherit the default author from `content/posts/_index.md`. The site-wide
 author name and avatar are configured in `hugo.toml`.
 
+Fenced code blocks include syntax highlighting and a copy button. Add an
+optional filename and Hugo highlighting options in the info string:
+
+````markdown
+```yaml {filename="deployment.yaml" lineNos=inline hl_lines="6-7"}
+apiVersion: apps/v1
+kind: Deployment
+```
+````
+
 ## Build
 
 Build the production site locally with:

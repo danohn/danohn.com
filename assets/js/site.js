@@ -3,6 +3,24 @@
   const colorScheme = window.matchMedia("(prefers-color-scheme: dark)");
   const themeToggle = document.querySelector("[data-theme-toggle]");
 
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.append(textarea);
+      textarea.select();
+      const copied = document.execCommand("copy");
+      textarea.remove();
+      return copied;
+    }
+  }
+
   function updateThemeToggle() {
     const isDark = root.dataset.theme === "dark";
     themeToggle?.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
@@ -74,14 +92,31 @@
     }
 
     copyShare?.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(shareUrl);
-        if (shareStatus) shareStatus.textContent = "Link copied.";
-      } catch {
-        if (shareStatus) shareStatus.textContent = "Unable to copy link.";
-      }
+      const copied = await copyText(shareUrl);
+      if (shareStatus) shareStatus.textContent = copied ? "Link copied." : "Unable to copy link.";
     });
   }
+
+  document.querySelectorAll("[data-code-block]").forEach((block) => {
+    const button = block.querySelector("[data-code-copy]");
+    const code = block.querySelector("code");
+    if (!button || !code) return;
+    const copyLabel = button.getAttribute("aria-label");
+
+    button.addEventListener("click", async () => {
+      const copied = await copyText(code.textContent);
+      if (copied) {
+        button.textContent = "Copied";
+        button.setAttribute("aria-label", "Code copied");
+      } else {
+        button.textContent = "Unable to copy";
+      }
+      window.setTimeout(() => {
+        button.textContent = "Copy";
+        button.setAttribute("aria-label", copyLabel);
+      }, 1600);
+    });
+  });
 
   const overlay = document.querySelector("[data-search-overlay]");
   const searchPanel = overlay?.querySelector('[role="dialog"]');

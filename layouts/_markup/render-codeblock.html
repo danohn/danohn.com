@@ -1,0 +1,14 @@
+{{- $language := .Type | default "text" -}}
+{{- $label := .Attributes.filename | default .Attributes.title | default $language -}}
+{{- $options := .Options -}}
+{{- if not (transform.CanHighlight $language) -}}
+  {{- $options = merge $options (dict "type" "text") -}}
+{{- end -}}
+{{- $highlighted := transform.HighlightCodeBlock . $options -}}
+<div class="code-block" data-code-block>
+  <div class="code-block-toolbar">
+    <span class="code-block-label">{{ $label }}</span>
+    <button class="code-copy" type="button" data-code-copy aria-label="Copy {{ $label }}" title="Copy code">Copy</button>
+  </div>
+  <pre tabindex="0" class="chroma"><code class="language-{{ $language }}" data-lang="{{ $language }}">{{ $highlighted.Inner }}</code></pre>
+</div>

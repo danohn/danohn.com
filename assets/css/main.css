@@ -315,7 +315,7 @@ input {
 }
 
 .code-preview,
-.article-body pre {
+.code-block pre {
   max-width: 540px;
   margin: 20px 0 0;
   padding: 16px 20px;
@@ -327,6 +327,181 @@ input {
   font-family: var(--font-mono);
   font-size: 13px;
   line-height: 1.7;
+}
+
+.code-block {
+  width: min(920px, calc(100vw - 48px));
+  margin: 34px 0 34px 50%;
+  overflow: hidden;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  transform: translateX(-50%);
+}
+
+.code-block-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 42px;
+  padding: 0 10px 0 16px;
+  color: var(--muted);
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.code-block-label {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.code-copy {
+  min-height: 30px;
+  padding: 0 8px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.code-copy:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.code-block pre {
+  max-width: none;
+  margin: 0;
+  padding: 18px 20px;
+  background: var(--code-bg);
+  border: 0;
+  border-radius: 0;
+  white-space: pre;
+}
+
+.code-block code {
+  display: block;
+  min-width: max-content;
+  font-size: inherit;
+}
+
+.code-block .chroma {
+  color: var(--text);
+  background: var(--code-bg);
+}
+
+.code-block .chroma .hl {
+  display: block;
+  margin: 0 -20px;
+  padding: 0 20px;
+  background: var(--accent-soft);
+}
+
+.code-block .chroma .lnt,
+.code-block .chroma .ln {
+  color: var(--muted);
+}
+
+.code-block .chroma .k,
+.code-block .chroma .kc,
+.code-block .chroma .kd,
+.code-block .chroma .kn,
+.code-block .chroma .kp,
+.code-block .chroma .kr,
+.code-block .chroma .kt {
+  color: #a23b47;
+}
+
+.code-block .chroma .s,
+.code-block .chroma .s1,
+.code-block .chroma .s2,
+.code-block .chroma .sa,
+.code-block .chroma .sb,
+.code-block .chroma .sc,
+.code-block .chroma .sd,
+.code-block .chroma .se,
+.code-block .chroma .sh,
+.code-block .chroma .si,
+.code-block .chroma .sr {
+  color: #35678a;
+}
+
+.code-block .chroma .c,
+.code-block .chroma .c1,
+.code-block .chroma .cm,
+.code-block .chroma .cp {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.code-block .chroma .m,
+.code-block .chroma .mi,
+.code-block .chroma .mf,
+.code-block .chroma .mh,
+.code-block .chroma .mo,
+.code-block .chroma .nb,
+.code-block .chroma .nf {
+  color: #76559b;
+}
+
+.code-block .chroma .gd {
+  color: #8d2d36;
+  background: #f8e7e7;
+}
+
+.code-block .chroma .gi {
+  color: #23623a;
+  background: #e4f2e7;
+}
+
+:root[data-theme="dark"] .code-block .chroma .k,
+:root[data-theme="dark"] .code-block .chroma .kc,
+:root[data-theme="dark"] .code-block .chroma .kd,
+:root[data-theme="dark"] .code-block .chroma .kn,
+:root[data-theme="dark"] .code-block .chroma .kp,
+:root[data-theme="dark"] .code-block .chroma .kr,
+:root[data-theme="dark"] .code-block .chroma .kt {
+  color: #e58b92;
+}
+
+:root[data-theme="dark"] .code-block .chroma .s,
+:root[data-theme="dark"] .code-block .chroma .s1,
+:root[data-theme="dark"] .code-block .chroma .s2,
+:root[data-theme="dark"] .code-block .chroma .sa,
+:root[data-theme="dark"] .code-block .chroma .sb,
+:root[data-theme="dark"] .code-block .chroma .sc,
+:root[data-theme="dark"] .code-block .chroma .sd,
+:root[data-theme="dark"] .code-block .chroma .se,
+:root[data-theme="dark"] .code-block .chroma .sh,
+:root[data-theme="dark"] .code-block .chroma .si,
+:root[data-theme="dark"] .code-block .chroma .sr {
+  color: #92bee0;
+}
+
+:root[data-theme="dark"] .code-block .chroma .m,
+:root[data-theme="dark"] .code-block .chroma .mi,
+:root[data-theme="dark"] .code-block .chroma .mf,
+:root[data-theme="dark"] .code-block .chroma .mh,
+:root[data-theme="dark"] .code-block .chroma .mo,
+:root[data-theme="dark"] .code-block .chroma .nb,
+:root[data-theme="dark"] .code-block .chroma .nf {
+  color: #c6a0e8;
+}
+
+:root[data-theme="dark"] .code-block .chroma .gd {
+  color: #f0a0a5;
+  background: #391c20;
+}
+
+:root[data-theme="dark"] .code-block .chroma .gi {
+  color: #9bd3a8;
+  background: #183322;
 }
 
 .post-index {
@@ -892,7 +1067,7 @@ input {
   }
 
   .code-preview,
-  .article-body pre {
+  .code-block {
     max-width: 100%;
   }
 }
