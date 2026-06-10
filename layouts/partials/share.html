@@ -1,11 +1,14 @@
+{{- $utmContent := .Title | urlize -}}
+{{- $xURL := printf "%s?utm_source=x&utm_medium=social&utm_campaign=share&utm_content=%s" .Permalink $utmContent -}}
+{{- $linkedinURL := printf "%s?utm_source=linkedin&utm_medium=social&utm_campaign=share&utm_content=%s" .Permalink $utmContent -}}
 <section class="share" aria-labelledby="share-title" data-share data-share-title="{{ .Title }}" data-share-url="{{ .Permalink }}">
   <h2 id="share-title">Share</h2>
   <div class="share-actions">
     <button type="button" data-share-native hidden>Share</button>
-    <a class="social-link" href="https://x.com/intent/post?url={{ .Permalink | urlquery }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener" aria-label="Share on X" title="Share on X">
+    <a class="social-link" href="https://x.com/intent/post?url={{ $xURL | urlquery }}&text={{ .Title | urlquery }}" target="_blank" rel="noopener" aria-label="Share on X" title="Share on X">
       <span class="social-icon social-icon-x" aria-hidden="true"></span>
     </a>
-    <a class="social-link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlquery }}" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+    <a class="social-link" href="https://www.linkedin.com/sharing/share-offsite/?url={{ $linkedinURL | urlquery }}" target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">
       <span class="social-icon social-icon-linkedin" aria-hidden="true"></span>
     </a>
     <button type="button" data-share-copy>Copy link</button>
