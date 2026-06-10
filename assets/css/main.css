@@ -648,6 +648,29 @@ input {
   font-weight: 560;
 }
 
+.footer-links .sponsor-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  margin: -2px 0;
+  padding: 2px 8px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.sponsor-link:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
+.sponsor-link .social-icon {
+  width: 15px;
+  height: 15px;
+}
+
 .social-link {
   display: inline-grid;
   place-items: center;

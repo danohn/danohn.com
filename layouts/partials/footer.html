@@ -1,6 +1,12 @@
 <footer class="site-footer">
   <p class="footer-copy">&copy; {{ now.Format "2006" }} Daniel Ohnesorge</p>
   <nav class="footer-links" aria-label="Footer links">
+    {{ with site.Params.social.sponsor }}
+      <a class="sponsor-link" href="{{ . }}" rel="noopener" target="_blank">
+        <span class="social-icon social-icon-github" aria-hidden="true"></span>
+        Sponsor
+      </a>
+    {{ end }}
     <a href="{{ "privacy/" | relURL }}">Privacy</a>
     <a class="social-link" href="{{ "index.xml" | relURL }}" aria-label="RSS feed" title="RSS feed">
       <span class="social-icon social-icon-rss" aria-hidden="true"></span>
