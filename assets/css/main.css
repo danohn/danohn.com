@@ -1075,15 +1075,6 @@ input {
     justify-content: flex-start;
   }
 
-  .site-footer {
-    display: block;
-    padding-bottom: 42px;
-  }
-
-  .footer-links {
-    justify-content: flex-start;
-    margin-top: 14px;
-  }
 }
 
 @media (max-width: 620px) {
@@ -1105,11 +1096,14 @@ input {
   }
 
   .site-footer {
+    display: block;
+    padding-bottom: 42px;
     text-align: center;
   }
 
   .footer-links {
     justify-content: center;
+    margin-top: 14px;
   }
 
   .intro h1 {
