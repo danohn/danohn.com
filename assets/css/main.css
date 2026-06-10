@@ -536,7 +536,6 @@ input {
   width: 100%;
   aspect-ratio: 1.9 / 1;
   object-fit: cover;
-  border: 1px solid var(--line);
   border-radius: 6px;
 }
 
@@ -595,7 +594,6 @@ input {
   display: block;
   max-width: 100%;
   margin: 0 auto;
-  border: 1px solid var(--line);
   border-radius: 6px;
 }
 
