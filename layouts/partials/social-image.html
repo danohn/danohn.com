@@ -1,5 +1,5 @@
 {{- $page := . -}}
-{{- $result := site.Params.socialImage | absURL -}}
+{{- $result := false -}}
 {{- $explicit := $page.Params.socialImage | default $page.Params.image -}}
 
 {{- if $explicit -}}
@@ -71,6 +71,10 @@
     -}}
     {{- $generated := . | images.Filter $filters -}}
     {{- $result = $generated.Permalink -}}
+  {{- end -}}
+{{- else -}}
+  {{- with resources.Get "images/social/base.png" -}}
+    {{- $result = (.Process "webp q85").Permalink -}}
   {{- end -}}
 {{- end -}}
 

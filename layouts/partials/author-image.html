@@ -1,0 +1,5 @@
+{{- $result := site.Params.authorImage | relURL -}}
+{{- with resources.Get site.Params.authorImage -}}
+  {{- $result = (.Fill "96x96 Center webp q85").RelPermalink -}}
+{{- end -}}
+{{- return $result -}}

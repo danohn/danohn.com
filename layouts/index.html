@@ -16,7 +16,7 @@
       {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
       <div class="article-byline featured-byline">
         {{ if eq $author site.Params.author }}
-          <a class="article-author-avatar" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}" aria-label="Posts by {{ $author }}"><img src="{{ site.Params.authorImage | relURL }}" alt=""></a>
+          <a class="article-author-avatar" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}" aria-label="Posts by {{ $author }}"><img src="{{ partial "author-image.html" . }}" alt=""></a>
         {{ end }}
         <div class="article-byline-text">
           <a class="article-author-name" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">{{ $author }}</a>
