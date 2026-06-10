@@ -1,9 +1,5 @@
 {{ define "main" }}
   {{ $posts := where site.RegularPages "Section" "posts" }}
-  <section class="intro">
-    <h1>{{ site.Params.description }}</h1>
-  </section>
-
   <section class="home-posts" aria-label="Posts">
     <div class="home-post-list">
       {{ range $posts }}

@@ -264,7 +264,7 @@ input {
 .home-posts {
   max-width: 760px;
   margin: 0 auto;
-  padding: 24px 0 48px;
+  padding: 4px 0 48px;
 }
 
 .home-post-list {
@@ -277,7 +277,7 @@ input {
 }
 
 .home-post:first-child {
-  padding-top: 18px;
+  padding-top: 0;
 }
 
 .home-post:last-child {
@@ -1098,7 +1098,7 @@ input {
   }
 
   .home-post:first-child {
-    padding-top: 12px;
+    padding-top: 0;
   }
 
   .home-post h2 {
