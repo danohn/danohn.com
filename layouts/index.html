@@ -1,55 +1,37 @@
 {{ define "main" }}
   {{ $posts := where site.RegularPages "Section" "posts" }}
-  {{ $featured := index $posts 0 }}
   <section class="intro">
     <h1>{{ site.Params.description }}</h1>
   </section>
 
-  {{ with $featured }}
-    <section class="featured" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
-      <p class="eyebrow">Latest</p>
-      <nav class="article-topics featured-topics" aria-label="Post topics">
-        {{ range .Params.topics }}<a href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
-      </nav>
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <p class="summary">{{ .Description }}</p>
-      {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
-      <div class="article-byline featured-byline">
-        {{ if eq $author site.Params.author }}
-          <a class="article-author-avatar" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}" aria-label="Posts by {{ $author }}"><img src="{{ partial "author-image.html" . }}" alt=""></a>
-        {{ end }}
-        <div class="article-byline-text">
-          <a class="article-author-name" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">{{ $author }}</a>
-          <div class="article-meta">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-            <span aria-hidden="true">/</span>
-            <span>{{ .ReadingTime }} min read</span>
+  <section class="home-posts" aria-labelledby="home-posts-title">
+    <p class="eyebrow" id="home-posts-title">Posts</p>
+    <div class="home-post-list">
+      {{ range $posts }}
+        <article class="home-post" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
+          <nav class="article-topics home-post-topics" aria-label="Post topics">
+            {{ range .Params.topics }}<a href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
+          </nav>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          {{ with .Description }}<p class="summary">{{ . }}</p>{{ end }}
+          {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
+          <div class="article-byline home-post-byline">
+            {{ if eq $author site.Params.author }}
+              <a class="article-author-avatar" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}" aria-label="Posts by {{ $author }}"><img src="{{ partial "author-image.html" . }}" alt=""></a>
+            {{ end }}
+            <div class="article-byline-text">
+              <a class="article-author-name" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">{{ $author }}</a>
+              <div class="article-meta">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                <span aria-hidden="true">/</span>
+                <span>{{ .ReadingTime }} min read</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <p class="post-preview">{{ .Params.summary | default .Summary | plainify | truncate 320 }}</p>
-      <a class="read-more" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}">Read post <span aria-hidden="true">&rarr;</span></a>
-      {{ with .Params.preview }}
-        <pre class="code-preview"><code>{{ . }}</code></pre>
+          <p class="post-preview">{{ .Params.summary | default .Summary | plainify | truncate 280 }}</p>
+          <a class="read-more" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}">Read post <span aria-hidden="true">&rarr;</span></a>
+        </article>
       {{ end }}
-    </section>
-  {{ end }}
-
-  {{ with after 1 $posts }}
-    <section class="post-index" aria-labelledby="all-posts">
-      <h2 id="all-posts">All posts</h2>
-      <div class="post-list">
-        {{ range . }}
-          <article class="post-row" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            <span>{{ .ReadingTime }} min read</span>
-            <span class="topic-wrap">
-              {{ range first 3 .Params.topics }}<span class="topic-pill">{{ . }}</span>{{ end }}
-            </span>
-          </article>
-        {{ end }}
-      </div>
-    </section>
-  {{ end }}
+    </div>
+  </section>
 {{ end }}

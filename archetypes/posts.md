@@ -4,6 +4,7 @@ description: ""
 summary: ""
 date: "{{ .Date }}"
 lastmod: "{{ .Date }}"
+draft: true
 authors: ["Daniel Ohnesorge"]
 topics: []
 canonical: ""

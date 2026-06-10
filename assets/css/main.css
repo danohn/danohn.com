@@ -261,6 +261,54 @@ input {
   margin-bottom: 28px;
 }
 
+.home-posts {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.home-posts > .eyebrow {
+  margin-bottom: 18px;
+}
+
+.home-post-list {
+  display: grid;
+}
+
+.home-post {
+  padding: 34px 0 38px;
+  border-bottom: 1px solid var(--line);
+}
+
+.home-post:first-child {
+  padding-top: 18px;
+}
+
+.home-post:last-child {
+  border-bottom: 0;
+}
+
+.home-post-topics {
+  margin-bottom: 14px;
+}
+
+.home-post h2 {
+  max-width: 720px;
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 1.16;
+  letter-spacing: 0;
+}
+
+.home-post .summary {
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+.home-post-byline {
+  margin-bottom: 20px;
+}
+
 .meta-row {
   display: flex;
   flex-wrap: wrap;
@@ -1047,6 +1095,18 @@ input {
 
   .featured h2 {
     font-size: 24px;
+  }
+
+  .home-post {
+    padding: 28px 0 32px;
+  }
+
+  .home-post:first-child {
+    padding-top: 12px;
+  }
+
+  .home-post h2 {
+    font-size: 26px;
   }
 
   .article-header {
