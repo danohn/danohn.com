@@ -74,7 +74,8 @@ Reference bundled images using paths relative to `index.md`:
 ```
 
 Hugo generates responsive WebP variants for bundled covers and Markdown images.
-Posts without a cover receive a generated typographic social preview.
+The original source images remain in Git but are excluded from the published
+site. Posts without a cover receive a generated typographic social preview.
 Posts inherit the default author from `content/posts/_index.md`. The site-wide
 author name and avatar are configured in `hugo.toml`.
 
