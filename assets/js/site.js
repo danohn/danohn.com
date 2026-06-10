@@ -28,6 +28,7 @@
 
   function updateGiscusTheme() {
     const iframe = document.querySelector("iframe.giscus-frame");
+    if (!iframe?.dataset.giscusReady) return;
     iframe?.contentWindow?.postMessage({
       giscus: {
         setConfig: {
@@ -58,8 +59,10 @@
     function connectGiscusTheme() {
       const iframe = comments.querySelector("iframe.giscus-frame");
       if (!iframe) return false;
-      iframe.addEventListener("load", updateGiscusTheme, { once: true });
-      updateGiscusTheme();
+      iframe.addEventListener("load", () => {
+        iframe.dataset.giscusReady = "true";
+        updateGiscusTheme();
+      }, { once: true });
       return true;
     }
 
