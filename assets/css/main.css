@@ -267,10 +267,6 @@ input {
   padding: 24px 0 48px;
 }
 
-.home-posts > .eyebrow {
-  margin-bottom: 18px;
-}
-
 .home-post-list {
   display: grid;
 }

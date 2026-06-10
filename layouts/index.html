@@ -4,8 +4,7 @@
     <h1>{{ site.Params.description }}</h1>
   </section>
 
-  <section class="home-posts" aria-labelledby="home-posts-title">
-    <p class="eyebrow" id="home-posts-title">Posts</p>
+  <section class="home-posts" aria-label="Posts">
     <div class="home-post-list">
       {{ range $posts }}
         <article class="home-post" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
