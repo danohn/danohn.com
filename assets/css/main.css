@@ -233,19 +233,32 @@ input {
   padding: 28px 0 26px;
 }
 
+.featured .eyebrow {
+  margin-bottom: 28px;
+}
+
+.featured-topics {
+  margin-bottom: 18px;
+}
+
 .featured h2 {
   max-width: 760px;
-  margin: 0 0 10px;
-  font-size: 28px;
-  line-height: 1.22;
+  margin: 0 0 14px;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.08;
   letter-spacing: 0;
 }
 
 .summary {
   max-width: 720px;
-  margin: 0 0 18px;
+  margin: 0 0 24px;
   color: var(--muted);
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.featured-byline {
+  margin-bottom: 28px;
 }
 
 .meta-row {
@@ -274,7 +287,7 @@ input {
 .post-preview {
   display: -webkit-box;
   max-width: 720px;
-  margin: 24px 0 10px;
+  margin: 0 0 10px;
   overflow: hidden;
   color: var(--text);
   font-size: 15px;

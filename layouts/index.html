@@ -8,17 +8,24 @@
   {{ with $featured }}
     <section class="featured" data-post-card data-topics="{{ delimit .Params.topics " " }}" data-title="{{ .Title }}">
       <p class="eyebrow">Latest</p>
+      <nav class="article-topics featured-topics" aria-label="Post topics">
+        {{ range .Params.topics }}<a href="{{ (printf "topics/%s/" .) | relURL }}">{{ . }}</a>{{ end }}
+      </nav>
       <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
       <p class="summary">{{ .Description }}</p>
-      <div class="meta-row">
-        {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
-        <a class="post-author" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">
-          {{ if eq $author site.Params.author }}<img src="{{ site.Params.authorImage | relURL }}" alt="">{{ end }}
-          <span>By {{ $author }}</span>
-        </a>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-        <span>{{ .ReadingTime }} min read</span>
-        {{ range first 4 .Params.topics }}<span class="topic-pill">{{ . }}</span>{{ end }}
+      {{ $author := index (.Params.authors | default (slice site.Params.author)) 0 }}
+      <div class="article-byline featured-byline">
+        {{ if eq $author site.Params.author }}
+          <a class="article-author-avatar" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}" aria-label="Posts by {{ $author }}"><img src="{{ site.Params.authorImage | relURL }}" alt=""></a>
+        {{ end }}
+        <div class="article-byline-text">
+          <a class="article-author-name" href="{{ (printf "authors/%s/" ($author | urlize)) | relURL }}">{{ $author }}</a>
+          <div class="article-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+            <span aria-hidden="true">/</span>
+            <span>{{ .ReadingTime }} min read</span>
+          </div>
+        </div>
       </div>
       <p class="post-preview">{{ .Params.summary | default .Summary | plainify | truncate 320 }}</p>
       <a class="read-more" href="{{ .RelPermalink }}" aria-label="Read {{ .Title }}">Read post <span aria-hidden="true">&rarr;</span></a>
